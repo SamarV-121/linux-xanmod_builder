@@ -1,10 +1,7 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,4 +13,8 @@ jobs:
         run: docker build . --file Dockerfile --tag xanmod_builder:latest
 
       - name: Run the Docker image
-        run: docker run -i -e GITHUB_KEY=${{ secrets.GITHUB_TOKEN }} -e REPO=${{ github.repository }} xanmod_builder:latest
+        run: |
+          WORKFLOW_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          docker run -i -e GITHUB_KEY=${{ secrets.GH_TOKEN }} \
+            -e TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} \
+            -e WORKFLOW_URL=${WORKFLOW_URL} xanmod_builder:latest
