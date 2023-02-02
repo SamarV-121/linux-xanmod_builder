@@ -38,7 +38,7 @@ VERSION=v${VERSION/ /}-$(date -u +%s)
 
 telegram -t "Compiling XanMod Kernel $VERSION: [See progress]($WORKFLOW_URL)"
 BUILD_START=$(date +"%s")
-env MAKEFLAGS="-s -j$(nproc)" _compiler=clang _lto=full use_numa=n use_tracers=n makepkg --skippgpcheck
+env MAKEFLAGS="-s -j$(nproc)" _compiler=clang _lto=full _localmodcfg=y use_numa=n use_tracers=n makepkg --skippgpcheck
 BUILD_STATUS="$?"
 BUILD_END=$(date +"%s")
 BUILD_DIFF=$((BUILD_END - BUILD_START))
