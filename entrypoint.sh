@@ -5,7 +5,7 @@ function telegram() {
 	local CURL_ARGS=()
 	local TELEGRAM_CHAT
 	local TELEGRAM_METHOD
-	TELEGRAM_CHAT="@SamarV121_CI"
+	TELEGRAM_CHAT="-1001710934728"
 	TELEGRAM_METHOD="sendMessage"
 	OPTIND=1
 
